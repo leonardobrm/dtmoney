@@ -1,11 +1,12 @@
 import React from 'react';
+import { Header } from './components/Header';
 import { GlobalStyle } from './styles/global';
 
 
 const App: React.FC = () => {
   return (
     <>
-      <h1>hello word</h1>
+      <Header />
       <GlobalStyle />
     </>
   );
