@@ -5,32 +5,30 @@ import incomeImg from '../../../../assets/income.svg';
 import outcomeImg from '../../../../assets/outcome.svg';
 import totalImg from '../../../../assets/total.svg';
 
+interface infosProps {
+  title: string;
+  icon: string;
+  value: string;
+}
 
+function Infos({title, icon, value}: infosProps){
+  return (
+    <div>
+        <header>
+          <p>{title}</p>
+          <img src={icon} alt={title}/>
+        </header>
+        <strong>{value}</strong>
+      </div>
+  )
+}
 
 export const Summary: React.FC = () => {
   return (
     <Container>
-      <div>
-        <header>
-          <p>Entradas</p>
-          <img src={incomeImg} alt="Entradas"/>
-        </header>
-        <strong>R$1000</strong>
-      </div>
-      <div>
-        <header>
-          <p>Saidas</p>
-          <img src={outcomeImg} alt="Entradas"/>
-        </header>
-        <strong>-R$1000</strong>
-      </div>
-      <div>
-        <header>
-          <p>Total</p>
-          <img src={totalImg} alt="Entradas"/>
-        </header>
-        <strong>R$1000</strong>
-      </div>
+      <Infos title="Entrada" icon={incomeImg} value="R$1000"/>
+      <Infos title="Saida" icon={outcomeImg} value="R$1000"/>
+      <Infos title="entrada" icon={totalImg} value="R$1000"/>
     </Container>
   )
 }
