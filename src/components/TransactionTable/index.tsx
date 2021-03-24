@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { api } from '../../services/api';
+import { useTransactions } from '../../hooks/useTransactions';
+import { formatDate, formatNumber } from '../../utils/formatValues';
 import { Container } from './styles';
-interface TransactionProps {
-  id: number;
-  title: string;
-  category: string;
-  amount: number;
-  createdAt: Date;
-  type: string;
-}
-interface TableProps {
-  transactions: TransactionProps[];
-}
 
-function Table( { transactions }: TableProps) {
-  console.log(transactions);
+function Table() {
+
+  const { transactions } = useTransactions();
+
 
   return (
     <table>
@@ -33,14 +24,14 @@ function Table( { transactions }: TableProps) {
             <tr key={transaction.id}>
               <td>{transaction.title}</td>
               <td className={transaction.type}>
-                {new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL'
-                }).format(transaction.amount)}
+                {transaction.type === 'withdraw'
+                ? `-${formatNumber(transaction.amount)}`
+                : formatNumber(transaction.amount)
+              }
               </td>
               <td>{transaction.category}</td>
               <td>
-                {new Intl.DateTimeFormat('pt-br').format(new Date(transaction.createdAt))}
+                {formatDate(transaction.createdAt)}
               </td>
             </tr>
           )
@@ -51,17 +42,9 @@ function Table( { transactions }: TableProps) {
 }
 
 export const TransactionsTable = () => {
-
-  const [transactions, setTransactions] = useState<TransactionProps[]>([]);
-
-  useEffect(() => {
-    api.get('transactions')
-      .then(response => setTransactions(response.data.transactions));
-  }, []);
-
   return (
     <Container>
-      <Table transactions={transactions}/>
+      <Table />
     </Container>
   )
 }
