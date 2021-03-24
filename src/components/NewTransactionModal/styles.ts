@@ -29,11 +29,12 @@ export const Container = styled.form`
     }
   }
 
+
   button[type="submit"] {
       width: 100%;
       padding: 0 1.5rem;
       height: 4rem;
-      background: var(--green);
+      background: #33CC95;
       color: #fff;
       border-radius: 0.25rem;
       border: 0;
@@ -70,7 +71,7 @@ export const RadioBox = styled.button<RadioBoxProps>`
     border: 1px solid #d7d7d7;
     border-radius: 0.25rem;
 
-    background: ${({isActive, isActiveColor}) => isActive
+    background: ${({ isActive, isActiveColor }) => isActive
     ? transparentize(0.9, colors[isActiveColor])
     : 'transparent'};
     display: flex;
